@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}{{ _('الصفحة الرئيسية') }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-content">
+        <h1>{{ _('Welcome to StudyMate') }}</h1>
+        <p>{{ _('AI-based study assistance') }}</p>
+        <a href="{{ url_for('tools.tools_list') }}" class="btn btn-primary">{{ _('Get Started') }}</a>
+    </div>
+</div>
+
+<div class="features">
+    <div class="container">
+        <h2>{{ _('مميزات المنصة') }}</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>{{ _('أدوات مخصصة لكل تخصص') }}</h3>
+                <p>{{ _('مجموعة متنوعة من الأدوات المصممة خصيصاً لتلبية احتياجات كل تخصص جامعي') }}</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>{{ _('تقنيات الذكاء الاصطناعي') }}</h3>
+                <p>{{ _('استفد من قوة الذكاء الاصطناعي في توليد الملاحظات وتلخيص المحاضرات') }}</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>{{ _('دعم اللغتين') }}</h3>
+                <p>{{ _('استخدم المنصة باللغة العربية أو الإنجليزية حسب تفضيلاتك') }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="specializations">
+    <div class="container">
+        <h2>{{ _('أدوات لجميع التخصصات') }}</h2>
+        <div class="specializations-grid">
+            <a href="{{ url_for('tools.specialty_tools', specialty='science') }}" class="specialization-card">
+                <div class="specialization-icon">🧪</div>
+                <h3>{{ _('العلوم') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='engineering') }}" class="specialization-card">
+                <div class="specialization-icon">🔢</div>
+                <h3>{{ _('الهندسة') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='business') }}" class="specialization-card">
+                <div class="specialization-icon">💼</div>
+                <h3>{{ _('إدارة الأعمال') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='law') }}" class="specialization-card">
+                <div class="specialization-icon">⚖️</div>
+                <h3>{{ _('القانون') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='medicine') }}" class="specialization-card">
+                <div class="specialization-icon">🏥</div>
+                <h3>{{ _('الطب') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='arts') }}" class="specialization-card">
+                <div class="specialization-icon">🎨</div>
+                <h3>{{ _('الفنون') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='literature') }}" class="specialization-card">
+                <div class="specialization-icon">📚</div>
+                <h3>{{ _('الآداب') }}</h3>
+            </a>
+            <a href="{{ url_for('tools.specialty_tools', specialty='it') }}" class="specialization-card">
+                <div class="specialization-icon">💻</div>
+                <h3>{{ _('تقنية المعلومات') }}</h3>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="cta">
+    <div class="container">
+        <h2>{{ _('ابدأ رحلتك الأكاديمية مع StudyMate') }}</h2>
+        <p>{{ _('انضم إلى آلاف الطلاب الذين يستخدمون منصتنا لتحسين أدائهم الأكاديمي وتنظيم دراستهم') }}</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-white">{{ _('سجل الآن مجاناً') }}</a>
+    </div>
+</div>
+{% endblock %}

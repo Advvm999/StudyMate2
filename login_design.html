@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate - تسجيل الدخول</title>
+    <style>
+        :root {
+            --blue-primary: #2563EB;
+            --blue-light: #93C5FD;
+            --blue-medium: #3B82F6;
+            --blue-dark: #1E40AF;
+            
+            --green-primary: #10B981;
+            --green-light: #A7F3D0;
+            --green-medium: #10B981;
+            --green-dark: #047857;
+            
+            --gray-lightest: #F9FAFB;
+            --gray-light: #E5E7EB;
+            --gray-medium: #6B7280;
+            --gray-dark: #374151;
+            
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #8B5CF6;
+            
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-lightest);
+            color: var(--gray-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--blue-primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--green-primary);
+        }
+        
+        .language-switcher {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-switcher select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid var(--gray-light);
+            background-color: var(--white);
+            color: var(--gray-dark);
+        }
+        
+        /* Auth Forms */
+        .auth-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+        }
+        
+        .auth-container {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-image {
+            flex: 1;
+            background: linear-gradient(to bottom right, var(--blue-medium), var(--green-medium));
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--white);
+        }
+        
+        .auth-image h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .auth-image p {
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .auth-image-illustration {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+        
+        .auth-form {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .auth-form h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--blue-dark);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--gray-dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--blue-medium);
+            box-shadow: 0 0 0 2px var(--blue-light);
+        }
+        
+        .form-group .error {
+            color: var(--red);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .form-footer {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--blue-primary);
+            color: var(--white);
+            border: none;
+            width: 100%;
+            font-size: 16px;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--blue-dark);
+        }
+        
+        .auth-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .auth-links a {
+            color: var(--blue-primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .auth-links a:hover {
+            color: var(--blue-dark);
+            text-decoration: underline;
+        }
+        
+        .auth-separator {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .auth-separator hr {
+            flex: 1;
+            border: none;
+            height: 1px;
+            background-color: var(--gray-light);
+        }
+        
+        .auth-separator span {
+            padding: 0 15px;
+            color: var(--gray-medium);
+            font-size: 14px;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .social-btn:hover {
+            background-color: var(--gray-lightest);
+        }
+        
+        .social-btn img {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray-medium);
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            color: var(--blue-primary);
+            border-bottom: 2px solid var(--blue-primary);
+        }
+        
+        .tab:hover:not(.active) {
+            color: var(--blue-dark);
+            background-color: var(--gray-lightest);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--white);
+            padding: 20px 0;
+            border-top: 1px solid var(--gray-light);
+            text-align: center;
+            color: var(--gray-medium);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+            
+            .auth-image {
+                padding: 30px;
+                text-align: center;
+            }
+            
+            .auth-form {
+                padding: 30px;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Study<span>Mate</span></a>
+            <div class="language-switcher">
+                <select>
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Auth Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-image">
+                    <h2>مرحباً بك في StudyMate</h2>
+                    <p>منصة تعليمية متكاملة لجميع طلاب الجامعة. سجل الآن واستفد من جميع الأدوات المتاحة لتحسين أدائك الأكاديمي.</p>
+                    <img src="https://placehold.co/400x300/93C5FD/1E40AF?text=StudyMate" alt="StudyMate Illustration" class="auth-image-illustration">
+                </div>
+                <div class="auth-form">
+                    <div class="tabs">
+                        <div class="tab active">تسجيل الدخول</div>
+                        <div class="tab">إنشاء حساب</div>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">كلمة المرور</label>
+                            <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+                        </div>
+                        <div class="auth-links">
+                            <a href="#">نسيت كلمة المرور؟</a>
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+                        </div>
+                        
+                        <div class="auth-separator">
+                            <hr>
+                            <span>أو</span>
+                            <hr>
+                        </div>
+                        
+                        <div class="social-login">
+                            <button type="button" class="social-btn">
+                                <img src="https://placehold.co/20x20/4285F4/FFFFFF?text=G" alt="Google">
+                                تسجيل الدخول بواسطة Google
+                            </button>
+                            <button type="button" class="social-btn">
+                                <img src="https://placehold.co/20x20/1877F2/FFFFFF?text=f" alt="Facebook">
+                                تسجيل الدخول بواسطة Facebook
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 StudyMate. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+</body>
+</html>

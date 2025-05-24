@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate - أدوات الطلاب</title>
+    <style>
+        :root {
+            --blue-primary: #2563EB;
+            --blue-light: #93C5FD;
+            --blue-medium: #3B82F6;
+            --blue-dark: #1E40AF;
+            
+            --green-primary: #10B981;
+            --green-light: #A7F3D0;
+            --green-medium: #10B981;
+            --green-dark: #047857;
+            
+            --gray-lightest: #F9FAFB;
+            --gray-light: #E5E7EB;
+            --gray-medium: #6B7280;
+            --gray-dark: #374151;
+            
+            --red: #EF4444;
+            --orange: #F59E0B;
+            --purple: #8B5CF6;
+            
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-lightest);
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--blue-primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--green-primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 20px;
+        }
+        
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--blue-primary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--blue-primary);
+            color: var(--blue-primary);
+            background-color: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--blue-light);
+            color: var(--blue-dark);
+        }
+        
+        .btn-primary {
+            background-color: var(--blue-primary);
+            color: var(--white);
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--blue-dark);
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .language-switcher select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid var(--gray-light);
+            background-color: var(--white);
+            color: var(--gray-dark);
+        }
+        
+        /* Page Content */
+        .page-content {
+            padding-top: 100px;
+            padding-bottom: 50px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 36px;
+            color: var(--blue-dark);
+            margin-bottom: 10px;
+        }
+        
+        .page-title p {
+            color: var(--gray-medium);
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Tools Filter */
+        .tools-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--gray-light);
+            background-color: var(--white);
+            color: var(--gray-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+        }
+        
+        .filter-btn.active {
+            background-color: var(--blue-primary);
+            color: var(--white);
+            border-color: var(--blue-primary);
+        }
+        
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .tool-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tool-image {
+            width: 100%;
+            height: 180px;
+            background-color: var(--blue-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        
+        .tool-content {
+            padding: 20px;
+        }
+        
+        .tool-category {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: var(--blue-light);
+            color: var(--blue-dark);
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .tool-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--blue-dark);
+        }
+        
+        .tool-description {
+            color: var(--gray-medium);
+            margin-bottom: 20px;
+        }
+        
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .tool-rating {
+            display: flex;
+            align-items: center;
+            color: var(--orange);
+        }
+        
+        .tool-rating span {
+            margin-right: 5px;
+            color: var(--gray-medium);
+        }
+        
+        /* AI Tools Section */
+        .ai-tools-section {
+            margin-top: 80px;
+            background-color: var(--blue-dark);
+            padding: 50px 0;
+            color: var(--white);
+            border-radius: 10px;
+        }
+        
+        .ai-tools-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .ai-tools-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .ai-tools-description {
+            max-width: 800px;
+            margin-bottom: 40px;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .ai-tool-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 30px 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .ai-tool-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .ai-tool-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .ai-tool-description {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--gray-dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            text-decoration: none;
+            color: var(--gray-light);
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--blue-light);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-medium);
+            color: var(--gray-light);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav ul {
+                margin-bottom: 15px;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Study<span>Mate</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">الأدوات</a></li>
+                    <li><a href="#">التخصصات</a></li>
+                    <li><a href="#">عن المنصة</a></li>
+                    <li><a href="#">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="language-switcher">
+                    <select>
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <a href="#" class="btn btn-outline">تسجيل الدخول</a>
+                <a href="#" class="btn btn-primary">إنشاء حساب</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="container">
+            <div class="page-title">
+                <h1>أدوات الطلاب</h1>
+                <p>مجموعة متنوعة من الأدوات المصممة خصيصاً لمساعدة الطلاب في مختلف التخصصات</p>
+            </div>
+            
+            <!-- Tools Filter -->
+            <div class="tools-filter">
+                <button class="filter-btn active">الكل</button>
+                <button class="filter-btn">العلوم</button>
+                <button class="filter-btn">الهندسة</button>
+                <button class="filter-btn">إدارة الأعمال</button>
+                <button class="filter-btn">القانون</button>
+                <button class="filter-btn">الطب</button>
+                <button class="filter-btn">الفنون</button>
+                <button class="filter-btn">الآداب</button>
+                <button class="filter-btn">تقنية المعلومات</button>
+            </div>
+            
+            <!-- Tools Grid -->
+            <div class="tools-grid">
+                <!-- Tool Card 1 -->
+                <div class="tool-card">
+                    <div class="tool-image">📊</div>
+                    <div class="tool-content">
+                        <span class="tool-category">إدارة الأعمال</span>
+                        <h3 class="tool-title">حاسبة المعادلات المالية</h3>
+                        <p class="tool-description">أداة لحساب المعادلات المالية المختلفة مثل الفائدة المركبة والقيمة الحالية والمستقبلية.</p>
+                        <div class="tool-footer">
+                            <div class="tool-rating">
+                                <span>4.8</span>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="#" class="btn btn-outline">استخدام الأداة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 2 -->
+                <div class="tool-card">
+                    <div class="tool-image">🧪</div>
+                    <div class="tool-content">
+                        <span class="tool-category">العلوم</span>
+                        <h3 class="tool-title">محول الوحدات العلمية</h3>
+                        <p class="tool-description">أداة لتحويل الوحدات العلمية المختلفة في الفيزياء والكيمياء والرياضيات.</p>
+                        <div class="tool-footer">
+                            <div class="tool-rating">
+                                <span>4.7</span>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="#" class="btn btn-outline">استخدام الأداة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 3 -->
+                <div class="tool-card">
+                    <div class="tool-image">📝</div>
+                    <div class="tool-content">
+                        <span class="tool-category">عام</span>
+                        <h3 class="tool-title">منظم الملاحظات</h3>
+                        <p class="tool-description">أداة لتنظيم وتصنيف الملاحظات الدراسية مع إمكانية البحث والتصدير.</p>
+                        <div class="tool-footer">
+                            <div class="tool-rating">
+                                <span>4.9</span>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="#" class="btn btn-outline">استخدام الأداة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 4 -->
+                <div class="tool-card">
+                    <div class="tool-image">⚖️</div>
+                    <div class="tool-content">
+                        <span class="tool-category">القانون</span>
+                        <h3 class="tool-title">مرجع القوانين</h3>
+                        <p class="tool-description">قاعدة بيانات للقوانين والتشريعات مع إمكانية البحث والاستشهاد.</p>
+                        <div class="tool-footer">
+                            <div class="tool-rating">
+                                <span>4.6</span>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="#" class="btn btn-outline">استخدام الأداة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 5 -->
+                <div class="tool-card">
+                    <div class="tool-image">🔢</div>
+                    <div class="tool-content">
+                        <span class="tool-category">الهندسة</span>
+                        <h3 class="tool-title">حاسبة المعادلات الهندسية</h3>
+                        <p class="tool-description">أداة لحل المعادلات الهندسية المعقدة ورسم الأشكال والمنحنيات.</p>
+                        <div class="tool-footer">
+                            <div class="tool-rating">
+                                <span>4.8</span>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="#" class="btn btn-outline">استخدام الأداة</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tool Card 6 -->
+                <div class="tool-card">
+                    <div class="tool-image">🏥</div>
+                    <div class="tool-content">
+                        <span class="tool-category">الطب</span>
+                        <h3 class="tool-title">أطلس التشريح</h3>
+                        <p class="tool-description">أطلس تفاعلي لجسم الإنسان مع معلومات تفصيلية عن كل عضو وجهاز.</p>
+                        <div class="tool-footer">
+                            <div class="tool-rating">
+                                <span>4.9</span>
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <a href="#" class="btn btn-outline">استخدام الأداة</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Tools Section -->
+            <section class="ai-tools-section">
+                <div class="ai-tools-container">
+                    <h2 class="ai-tools-title">أدوات الذكاء الاصطناعي</h2>
+                    <p class="ai-tools-description">استفد من قوة الذكاء الاصطناعي في تحسين تجربتك الدراسية مع مجموعة من الأدوات المتقدمة</p>
+                    
+                    <div class="ai-tools-grid">
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">📝</div>
+                            <h3 class="ai-tool-title">توليد الملاحظات</h3>
+                            <p class="ai-tool-description">حول النصوص والمحاضرات إلى ملاحظات منظمة ومنسقة بشكل تلقائي</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">📚</div>
+                            <h3 class="ai-tool-title">تلخيص المحاضرات</h3>
+                            <p class="ai-tool-description">الحصول على ملخصات دقيقة للمحاضرات والنصوص الطويلة</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">💡</div>
+                            <h3 class="ai-tool-title">اقتراحات الدراسة</h3>
+                            <p class="ai-tool-description">احصل على توصيات مخصصة لتحسين أسلوب دراستك وزيادة الإنتاجية</p>
+                        </div>
+                        
+                        <div class="ai-tool-card">
+                            <div class="ai-tool-icon">❓</div>
+                            <h3 class="ai-tool-title">الإجابة على الأسئلة</h3>
+                            <p class="ai-tool-description">الحصول على إجابات فورية لأسئلتك الأكاديمية في مختلف المجالات</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>StudyMate</h3>
+                    <ul>
+                        <li><a href="#">عن المنصة</a></li>
+                        <li><a href="#">فريق العمل</a></li>
+                        <li><a href="#">الوظائف</a></li>
+                        <li><a href="#">الأخبار</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>الميزات</h3>
+                    <ul>
+                        <li><a href="#">الأدوات التعليمية</a></li>
+                        <li><a href="#">الذكاء الاصطناعي</a></li>
+                        <li><a href="#">تتبع التقدم</a></li>
+                        <li><a href="#">المجتمع</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>الدعم</h3>
+                    <ul>
+                        <li><a href="#">الأسئلة الشائعة</a></li>
+                        <li><a href="#">التواصل معنا</a></li>
+                        <li><a href="#">الدعم الفني</a></li>
+                        <li><a href="#">الشروط والأحكام</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>تابعنا</h3>
+                    <ul>
+                        <li><a href="#">فيسبوك</a></li>
+                        <li><a href="#">تويتر</a></li>
+                        <li><a href="#">انستغرام</a></li>
+                        <li><a href="#">لينكد إن</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 StudyMate. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
